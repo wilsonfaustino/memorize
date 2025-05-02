@@ -1,7 +1,7 @@
 import { Clock, LucideIcon, MousePointerClick, RotateCcw } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
-type ScoreBoardProps = {
+interface ScoreBoardProps {
   moves: number
   time: number
   onRestart: () => void
