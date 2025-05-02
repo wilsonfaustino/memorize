@@ -1,16 +1,19 @@
-import { EMOJIS } from '@/const'
-import { createCardObjects, pickAndShuffleEmojis } from '@/helpers'
+import { MemoryCard } from '@/@types'
 import { Card } from './card'
 
-const CARDS = createCardObjects(pickAndShuffleEmojis(EMOJIS, 6))
+interface GameBoardProps {
+  cards: MemoryCard[]
+  onCardClick: (id: string) => void
+}
 
-export function GameBoard() {
+export function GameBoard({ cards, onCardClick }: GameBoardProps) {
   return (
     <div className="grid grid-cols-4 gap-2 rounded-xl bg-blue-100 p-2">
-      {CARDS.map((card) => (
+      {cards.map((card) => (
         <Card
           key={card.id}
           {...card}
+          onClick={() => onCardClick(card.id)}
         />
       ))}
     </div>
