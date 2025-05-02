@@ -2,7 +2,7 @@ import { EMOJIS } from '@/const'
 import { createCardObjects, pickAndShuffleEmojis } from '@/helpers'
 import { Card } from './card'
 
-const CARDS = createCardObjects(pickAndShuffleEmojis(EMOJIS, 8))
+const CARDS = createCardObjects(pickAndShuffleEmojis(EMOJIS, 6))
 
 export function GameBoard() {
   return (
