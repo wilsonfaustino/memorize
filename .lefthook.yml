@@ -1,8 +1,6 @@
 pre-commit:
-  parallel: true
   commands:
-    lint-filenames:
-      files: git diff --cached --name-only --diff-filter=ACM
-      run: node scripts/lint-filenames.js {files}
-    biome:
-      run: npx biome check --write
+    lint:
+      glob: '**/*.(jsx|js|ts|tsx)'
+      run: npm run lint {staged_files}
+      stage_fixed: true
