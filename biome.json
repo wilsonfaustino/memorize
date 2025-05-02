@@ -23,6 +23,14 @@
       "a11y": {
         "useFocusableInteractive": "off"
       },
+      "style": {
+        "useFilenamingConvention": {
+          "level": "error",
+          "options": {
+            "filenameCases": ["kebab-case"]
+          }
+        }
+      },
       "nursery": {
         "useSortedClasses": {
           "fix": "safe",
