@@ -23,3 +23,16 @@ export function createCardObjects(emojis: string[]): MemoryCard[] {
     isMatched: false,
   }))
 }
+
+export const shuffleArray = <T>(array: T[]): T[] => {
+  const shuffledArray = [...array]
+  for (let i = shuffledArray.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]]
+  }
+  return shuffledArray
+}
+
+export async function sleep(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms))
+}
