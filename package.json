@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "lint": "biome lint",
+    "lint": "biome check --write",
     "format": "biome format",
     "preview": "vite preview"
   },
@@ -27,7 +27,6 @@
     "@types/react-dom": "^19.0.4",
     "@vitejs/plugin-react-swc": "^3.8.0",
     "globals": "^16.0.0",
-    "globby": "14.1.0",
     "lefthook": "1.11.12",
     "typescript": "~5.7.2",
     "vite": "^6.3.1"
