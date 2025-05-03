@@ -1,25 +1,29 @@
 import * as RadioGroup from '@radix-ui/react-radio-group'
 import { Brain, Sparkles, Zap } from 'lucide-react'
 import { motion } from 'motion/react'
+import { Difficulty } from '@/@types'
+import { ANIMATIONS, EASY, HARD, MEDIUM } from '@/const'
 import { cn } from '@/lib/utils'
 
 const DIFFICULTY_OPTIONS = [
-  { label: 'Easy', value: 'easy', icon: Sparkles, color: 'from-green-500 to-green-700' },
-  { label: 'Medium', value: 'medium', icon: Brain, color: 'from-indigo-500 to-indigo-700' },
-  { label: 'Hard', value: 'hard', icon: Zap, color: 'from-purple-500 to-purple-700' },
+  { label: 'Easy', value: EASY, icon: Sparkles, color: 'from-green-500 to-green-700' },
+  { label: 'Medium', value: MEDIUM, icon: Brain, color: 'from-indigo-500 to-indigo-700' },
+  { label: 'Hard', value: HARD, icon: Zap, color: 'from-purple-500 to-purple-700' },
 ]
 
-export function DifficultySelector() {
+interface DifficultSelectorProps {
+  onChange: (value: Difficulty) => void
+}
+
+export function DifficultySelector({ onChange }: DifficultSelectorProps) {
   return (
     <motion.div
-      animate={{ opacity: 1, y: 0 }}
       className="flex w-full flex-col gap-8 px-4"
-      exit={{ opacity: 0 }}
-      initial={{ opacity: 0, y: -300 }}>
+      {...ANIMATIONS.fadeInUp}>
       <h2 className="text-center font-bold text-2xl text-white sm:text-3xl">Select Difficulty</h2>
       <RadioGroup.Root
         className="flex flex-col justify-center gap-3 sm:flex-row sm:gap-4 "
-        onValueChange={(value) => console.log(value)}>
+        onValueChange={onChange}>
         {DIFFICULTY_OPTIONS.map(({ label, value, icon: Icon, color }) => (
           <RadioGroup.Item
             asChild
