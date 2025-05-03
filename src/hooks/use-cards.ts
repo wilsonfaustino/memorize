@@ -110,7 +110,5 @@ export function useCards() {
     }
   }, [isAllCardsMatched, onOpen, stopTimer])
 
-  console.log('flippedCards', flippedCards)
-
   return { cards, flipCard, restartGame, isOpen, moves: counter, time, checkCardTemporaryFlipped }
 }
