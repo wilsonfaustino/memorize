@@ -6,24 +6,30 @@ import { GameBoard } from '@/components/game-board'
 import { ScoreBoard } from '@/components/score-board'
 import { formatTime } from '@/helpers'
 import { useCards } from '@/hooks/use-cards'
+import { useDifficulty } from '@/hooks/use-difficulty'
 
 function App() {
-  const difficulty = undefined
-  const { cards, flipCard, restartGame, isOpen, moves, time, checkCardTemporaryFlipped } = useCards()
+  const { difficulty, handleDifficultyChange, resetDifficulty } = useDifficulty()
+  const { cards, flipCard, restartGame, isOpen, moves, time, checkCardTemporaryFlipped } = useCards({ difficulty })
   const formattedTime = formatTime(time)
+
+  const handleRestart = () => {
+    resetDifficulty()
+    restartGame()
+  }
 
   return (
     <AppContainer>
       {!difficulty ? (
-        <DifficultySelector />
+        <DifficultySelector onChange={handleDifficultyChange} />
       ) : (
         <>
           <ScoreBoard
             moves={moves}
-            onRestart={restartGame}
+            onRestart={handleRestart}
             time={formattedTime}
           />
-          <GameBoard>
+          <GameBoard difficulty={difficulty}>
             {cards.map(({ id, emoji, isFlipped, isMatched }) => (
               <Card
                 emoji={emoji}
@@ -37,7 +43,7 @@ function App() {
           <EndGameModal
             isOpen={isOpen}
             moves={moves}
-            onRestart={restartGame}
+            onRestart={handleRestart}
             time={formattedTime}
           />
         </>
