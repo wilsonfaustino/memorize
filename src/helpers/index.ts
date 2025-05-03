@@ -1,4 +1,5 @@
-import type { MemoryCard } from '@/@types'
+import type { Difficulty, MemoryCard } from '@/@types'
+import { EMOJIS, PairCount } from '@/const'
 
 export function pickAndShuffleEmojis(emojis: string[], count: number): string[] {
   if (count > emojis.length) {
@@ -41,4 +42,10 @@ export function formatTime(seconds: number): string {
   const minutes = Math.floor(seconds / 60)
   const remainingSeconds = seconds % 60
   return `${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`
+}
+
+export function setupEmojiArray(difficulty: Difficulty) {
+  if (!difficulty) return []
+  const emojis = pickAndShuffleEmojis(EMOJIS, PairCount[difficulty])
+  return createCardObjects(emojis)
 }
