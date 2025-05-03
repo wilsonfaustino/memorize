@@ -1,16 +1,17 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import type { MemoryCard } from '@/@types'
-import { EMOJIS } from '@/const'
-import { createCardObjects, pickAndShuffleEmojis, shuffleArray, sleep } from '@/helpers'
+import { EMOJIS, PairCount } from '@/const'
+import { createCardObjects, pickAndShuffleEmojis, setupEmojiArray, shuffleArray, sleep } from '@/helpers'
 import { useCounter } from '@/hooks/use-counter'
 import { useDisclosure } from '@/hooks/use-disclosure'
 import { useTimer } from '@/hooks/use-timer'
 
-export function useCards() {
-  const [cards, setCards] = useState(() => {
-    const emojis = pickAndShuffleEmojis(EMOJIS, 6)
-    return createCardObjects(emojis)
-  })
+interface UseCardsProps {
+  difficulty: 'easy' | 'medium' | 'hard' | null
+}
+
+export function useCards({ difficulty }: UseCardsProps) {
+  const [cards, setCards] = useState<MemoryCard[]>([])
   const [flippedCards, setFlippedCards] = useState<string[]>([])
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { counter, incrementCounter, resetCounter } = useCounter({ initialValue: 0 })
@@ -18,7 +19,7 @@ export function useCards() {
   const endTriggered = useRef(false)
 
   const isAllCardsMatched = useMemo(() => {
-    const allCardsMatched = cards.every((card) => card.isMatched)
+    const allCardsMatched = cards.length > 0 && cards.every((card) => card.isMatched)
 
     return allCardsMatched
   }, [cards])
@@ -40,13 +41,25 @@ export function useCards() {
         return
       }
 
-      setCards((prevCards) =>
-        prevCards.map((card) => (card.id === firstId || card.id === secondId ? { ...card, isMatched: true } : card)),
-      )
+      setCards((prevCards) => {
+        const updated = prevCards.map((card) =>
+          card.id === firstId || card.id === secondId ? { ...card, isMatched: true } : card,
+        )
+
+        const allMatched = updated.every((card) => card.isMatched)
+
+        if (allMatched && !endTriggered.current) {
+          endTriggered.current = true
+          onOpen()
+          stopTimer()
+        }
+
+        return updated
+      })
       setFlippedCards([])
       incrementCounter()
     },
-    [cards, incrementCounter],
+    [cards, incrementCounter, onOpen, stopTimer],
   )
 
   const flipCard = useCallback(
@@ -103,12 +116,11 @@ export function useCards() {
   )
 
   useEffect(() => {
-    if (isAllCardsMatched && !endTriggered.current) {
-      endTriggered.current = true
-      onOpen()
-      stopTimer()
-    }
-  }, [isAllCardsMatched, onOpen, stopTimer])
+    if (!difficulty) return
+    const newCards = setupEmojiArray(difficulty)
+
+    setCards(newCards)
+  }, [difficulty])
 
   return { cards, flipCard, restartGame, isOpen, moves: counter, time, checkCardTemporaryFlipped }
 }
