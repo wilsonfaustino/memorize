@@ -3,7 +3,7 @@ import { cn } from '@/lib/utils'
 
 interface ScoreBoardProps {
   moves: number
-  time: number
+  time: string
   onRestart: () => void
 }
 
