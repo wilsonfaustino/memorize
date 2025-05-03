@@ -1,4 +1,6 @@
 import { Clock, LucideIcon, MousePointerClick, RotateCcw } from 'lucide-react'
+import { motion } from 'motion/react'
+import { ANIMATIONS } from '@/const'
 import { cn } from '@/lib/utils'
 
 interface ScoreBoardProps {
@@ -40,7 +42,9 @@ const ScoreItem = ({ icon: Icon, label, value, color }: ScoreItemProps) => (
 
 export function ScoreBoard({ moves, time, onRestart }: ScoreBoardProps) {
   return (
-    <div className="flex w-full flex-col items-center justify-center gap-4 rounded-xl bg-blue-100 p-4 *:text-white">
+    <motion.div
+      className="flex w-full flex-col items-center justify-center gap-4 rounded-xl bg-blue-100 p-4 *:text-white sm:w-auto sm:flex-row"
+      {...ANIMATIONS.fadeInDown}>
       {SCORE_ITEMS.map(({ icon, label, color, getValue }) => (
         <ScoreItem
           color={color}
@@ -58,6 +62,6 @@ export function ScoreBoard({ moves, time, onRestart }: ScoreBoardProps) {
         <RotateCcw className="group-hover:-rotate-180 h-4 w-4 transition-transform duration-500" />
         Restart
       </button>
-    </div>
+    </motion.div>
   )
 }
