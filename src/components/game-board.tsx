@@ -11,7 +11,7 @@ const GRID_CONFIG = {
 }
 
 interface GameBoardProps {
-  children: ReactNode
+  children?: ReactNode
   difficulty: Difficulty
 }
 
