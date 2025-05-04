@@ -16,6 +16,7 @@ export function useCards({ difficulty }: UseCardsProps) {
   const { counter, incrementCounter, resetCounter } = useCounter({ initialValue: 0 })
   const { time, startTimer, resetTimer, stopTimer, isRunning } = useTimer()
   const endTriggered = useRef(false)
+  const lockRef = useRef(false)
 
   const checkForMatch = useCallback(
     (firstId: string, secondId: string) => {
@@ -23,6 +24,7 @@ export function useCards({ difficulty }: UseCardsProps) {
       const secondCard = cards.find((card) => card.id === secondId)
       if (!(firstCard && secondCard && firstCard.emoji === secondCard.emoji)) {
         incrementCounter()
+        lockRef.current = true
         setTimeout(() => {
           setCards((prevCards) =>
             prevCards.map((card) =>
@@ -30,6 +32,7 @@ export function useCards({ difficulty }: UseCardsProps) {
             ),
           )
           setFlippedCards([])
+          lockRef.current = false
         }, 1000)
         return
       }
@@ -57,6 +60,7 @@ export function useCards({ difficulty }: UseCardsProps) {
 
   const flipCard = useCallback(
     (id: string) => {
+      if (lockRef.current) return
       if (!isRunning) {
         startTimer()
       }
@@ -100,13 +104,6 @@ export function useCards({ difficulty }: UseCardsProps) {
     performRestartSequence(shuffledCards)
   }
 
-  const checkCardTemporaryFlipped = useCallback(
-    (id: string) => {
-      return flippedCards.includes(id)
-    },
-    [flippedCards],
-  )
-
   useEffect(() => {
     if (!difficulty) return
     const newCards = setupEmojiArray(difficulty)
@@ -114,5 +111,5 @@ export function useCards({ difficulty }: UseCardsProps) {
     setCards(newCards)
   }, [difficulty])
 
-  return { cards, flipCard, restartGame, isOpen, moves: counter, time, checkCardTemporaryFlipped }
+  return { cards, flipCard, restartGame, isOpen, moves: counter, time }
 }
