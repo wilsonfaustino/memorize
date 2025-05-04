@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-
+import { Difficulty } from '@/@types'
 import { EMOJIS } from '@/const'
 import {
   createCardObjects,
@@ -8,6 +8,7 @@ import {
   pickAndShuffleEmojis,
   setupEmojiArray,
   shuffleArray,
+  sleep,
 } from '@/helpers'
 
 // Utils
@@ -44,6 +45,11 @@ describe('helpers', () => {
     expect(unique.size).toBe(count)
   })
 
+  it('pickAndShuffleEmojis - should throw an error if count is greater than available emojis', () => {
+    const count = 10
+    expect(() => pickAndShuffleEmojis(['🦊', '🐸'], count)).toThrow(Error)
+  })
+
   it('createCardObjects - should create MemoryCard objects with proper fields', () => {
     const emojis = ['🦊', '🐸', '🦊', '🐸']
     const cards = createCardObjects(emojis)
@@ -62,5 +68,17 @@ describe('helpers', () => {
     expect(cards[0]).toHaveProperty('emoji')
     expect(cards[0]).toHaveProperty('isFlipped')
     expect(cards[0]).toHaveProperty('isMatched')
+  })
+
+  it('setupEmojiArray - should return an empty array if no difficulty is provided', () => {
+    const cards = setupEmojiArray(undefined as unknown as Difficulty)
+    expect(cards).toHaveLength(0)
+  })
+
+  it('sleep - should resolve after a given time', async () => {
+    const start = Date.now()
+    await sleep(100)
+    const end = Date.now()
+    expect(end - start).toBeGreaterThanOrEqual(100)
   })
 })
