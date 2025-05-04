@@ -39,7 +39,7 @@ Memorize is a fast and beautiful memory card game built using cutting-edge front
 * ✅ Matched pairs tracking
 * 🎉 End-game modal with stats
 * 🧼 Clean code, accessible components, and atomic hooks
-- 🔧 Fully tested with unit tests and hooks coverage using Vitest
+* 🔧 Fully tested with unit tests and hooks coverage using Vitest
 
 ---
 
