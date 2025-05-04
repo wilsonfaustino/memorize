@@ -1,16 +1,16 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import type { Difficulty } from '@/@types'
 
 export function useDifficulty() {
   const [difficulty, setDifficulty] = useState<Difficulty | null>(null)
 
-  const handleDifficultyChange = (newDifficulty: Difficulty) => {
+  const handleDifficultyChange = useCallback((newDifficulty: Difficulty) => {
     setDifficulty(newDifficulty)
-  }
+  }, [])
 
-  const resetDifficulty = () => {
+  const resetDifficulty = useCallback(() => {
     setDifficulty(null)
-  }
+  }, [])
 
   return {
     difficulty,
