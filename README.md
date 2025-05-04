@@ -1,5 +1,7 @@
 # 🧠 Memorize – A Memory Game Built with Modern Web Tech
 
+[![Run Vitest](https://github.com/wilsonfaustino/memorize/actions/workflows/test.yml/badge.svg)](https://github.com/wilsonfaustino/memorize/actions/workflows/test.yml)
+
 Memorize is a fast and beautiful memory card game built using cutting-edge front-end tools — designed to be lightweight, accessible, and fun.
 
 > Challenge yourself, beat the timer, and try not to rage-click.
