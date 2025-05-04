@@ -8,7 +8,7 @@ Memorize is a fast and beautiful memory card game built using cutting-edge front
 
 ## 🎮 Demo
 
-Coming soon...
+[Visit demo](https://memorize-7lgb.vercel.app/)
 
 ---
 
