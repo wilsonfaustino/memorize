@@ -10,7 +10,7 @@ import { useDifficulty } from '@/hooks/use-difficulty'
 
 function App() {
   const { difficulty, handleDifficultyChange, resetDifficulty } = useDifficulty()
-  const { cards, flipCard, restartGame, isOpen, moves, time, checkCardTemporaryFlipped } = useCards({ difficulty })
+  const { cards, flipCard, restartGame, isOpen, moves, time } = useCards({ difficulty })
   const formattedTime = formatTime(time)
 
   const handleRestart = () => {
@@ -33,7 +33,7 @@ function App() {
             {cards.map(({ id, emoji, isFlipped, isMatched }) => (
               <Card
                 emoji={emoji}
-                isFlipped={isFlipped || checkCardTemporaryFlipped(id)}
+                isFlipped={isFlipped}
                 isMatched={isMatched}
                 key={id}
                 onClick={() => flipCard(id)}
