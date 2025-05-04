@@ -1,54 +1,86 @@
-# React + TypeScript + Vite
+# 🧠 Memorize – A Memory Game Built with Modern Web Tech
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Memorize is a fast and beautiful memory card game built using cutting-edge front-end tools — designed to be lightweight, accessible, and fun.
 
-Currently, two official plugins are available:
+> Challenge yourself, beat the timer, and try not to rage-click.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🎮 Demo
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Coming soon...
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+---
+
+## 🚀 Tech Stack
+
+| Tool                                                     | Purpose                                |
+| -------------------------------------------------------- | -------------------------------------- |
+| [React 19](https://react.dev)                            | UI framework                           |
+| [TypeScript](https://www.typescriptlang.org)             | Static typing                          |
+| [Vite 6](https://vitejs.dev)                             | Lightning-fast bundler                 |
+| [Tailwind CSS v4](https://tailwindcss.com)               | Styling with utility classes           |
+| [Motion](https://motion.dev/)                            | Animations                             |
+| [Radix UI](https://www.radix-ui.com/)                    | Accessible primitives (modals, radios) |
+| [Lucide Icons](https://lucide.dev)                       | SVG-based modern icon set              |
+| [Biome](https://biomejs.dev)                             | Linting & formatting in one tool       |
+| [Lefthook](https://evilmartians.com/chronicles/lefthook) | Git hooks for pre-commit automation    |
+
+---
+
+## 📆 Features
+
+* 🃏 Select your difficulty: Easy, Medium, or Hard
+* 🔁 Emoji-based cards with random shuffling
+* ⏱️ Timer and move counter
+* ✅ Matched pairs tracking
+* 🎉 End-game modal with stats
+* 🧼 Clean code, accessible components, and atomic hooks
+
+---
+
+## 🧪 Commands
+
+```bash
+# Start dev server
+pnpm dev
+
+# Build for production
+pnpm build
+
+# Preview production build
+pnpm preview
+
+# Lint and format code
+pnpm lint
+pnpm format
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+> Pre-commit checks (via Lefthook) run Biome automatically on staged JS/TS/TSX files.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+## 📁 Project Structure
+
 ```
+src/
+├── components/       # UI pieces (Card, GameBoard, Modal, etc.)
+├── hooks/            # Game logic (useCards, useTimer, etc.)
+├── const/            # Emojis, difficulties, animations
+├── helpers/          # Utility functions (shuffle, id, etc.)
+├── @types/           # Global types (MemoryCard, Difficulty)
+├── index.css         # Global styles (Tailwind + CSS vars)
+└── main.tsx          # App entry point
+```
+
+---
+
+## Credits
+
+Built with ❤️ and ☕.
+
+---
+
+## 📜 License
+
+MIT
