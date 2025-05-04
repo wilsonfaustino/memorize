@@ -59,7 +59,7 @@ export function ScoreBoard({ moves, time, onRestart }: ScoreBoardProps) {
         className="group flex items-center gap-2 px-2 text-base hover:text-pink"
         onClick={onRestart}
         type="button">
-        <RotateCcw className="group-hover:-rotate-180 h-4 w-4 transition-transform duration-500" />
+        <RotateCcw className="group-hover:-rotate-45 h-4 w-4 transition-transform duration-500" />
         Restart
       </button>
     </motion.div>
