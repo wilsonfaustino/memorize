@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import type { MemoryCard } from '@/@types'
-import { setupEmojiArray, shuffleArray, sleep } from '@/helpers'
+import { setupEmojiArray, shuffleArray } from '@/helpers'
 import { useCounter } from '@/hooks/use-counter'
 import { useDisclosure } from '@/hooks/use-disclosure'
 import { useTimer } from '@/hooks/use-timer'
@@ -91,12 +91,11 @@ export function useCards({ difficulty }: UseCardsProps) {
     [isOpen, onClose, resetCounter, resetTimer],
   )
 
-  const restartGame = async () => {
+  const restartGame = () => {
     const newCards = cards.map((card) => ({ ...card, isFlipped: false, isMatched: false }))
     setCards(newCards)
     setFlippedCards([])
     const shuffledCards = shuffleArray([...newCards])
-    await sleep(1000)
 
     performRestartSequence(shuffledCards)
   }
