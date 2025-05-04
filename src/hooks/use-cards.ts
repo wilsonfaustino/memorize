@@ -19,9 +19,9 @@ export function useCards({ difficulty }: UseCardsProps) {
   const lockRef = useRef(false)
 
   const checkForMatch = useCallback(
-    (firstId: string, secondId: string) => {
-      const firstCard = cards.find((card) => card.id === firstId)
-      const secondCard = cards.find((card) => card.id === secondId)
+    (firstId: string, secondId: string, currentCards: MemoryCard[]) => {
+      const firstCard = currentCards.find((card) => card.id === firstId)
+      const secondCard = currentCards.find((card) => card.id === secondId)
       if (!(firstCard && secondCard && firstCard.emoji === secondCard.emoji)) {
         incrementCounter()
         lockRef.current = true
@@ -55,7 +55,7 @@ export function useCards({ difficulty }: UseCardsProps) {
       setFlippedCards([])
       incrementCounter()
     },
-    [cards, incrementCounter, onOpen, stopTimer],
+    [incrementCounter, onOpen, stopTimer],
   )
 
   const flipCard = useCallback(
@@ -65,9 +65,11 @@ export function useCards({ difficulty }: UseCardsProps) {
         startTimer()
       }
 
+      const updatedCards = cards.map((card) => (card.id === id ? { ...card, isFlipped: true } : card))
+
       if (!flippedCards.length) {
         setFlippedCards([id])
-        setCards((prevCards) => prevCards.map((card) => (card.id === id ? { ...card, isFlipped: true } : card)))
+        setCards(updatedCards)
         return
       }
 
@@ -78,10 +80,10 @@ export function useCards({ difficulty }: UseCardsProps) {
       if (id === firstCardId || newFlippedCards.length > 2) return
 
       setFlippedCards(newFlippedCards)
-      setCards((prevCards) => prevCards.map((card) => (card.id === id ? { ...card, isFlipped: true } : card)))
-      checkForMatch(firstCardId, id)
+      setCards(updatedCards)
+      checkForMatch(firstCardId, id, updatedCards)
     },
-    [checkForMatch, isRunning, startTimer, flippedCards],
+    [cards, checkForMatch, isRunning, startTimer, flippedCards],
   )
 
   const performRestartSequence = useCallback(
