@@ -24,6 +24,7 @@ Memorize is a fast and beautiful memory card game built using cutting-edge front
 | [Radix UI](https://www.radix-ui.com/)                    | Accessible primitives (modals, radios) |
 | [Lucide Icons](https://lucide.dev)                       | SVG-based modern icon set              |
 | [Biome](https://biomejs.dev)                             | Linting & formatting in one tool       |
+| [Vitest](https://vitest.dev)                             | Blazing fast unit testing framework    |
 | [Lefthook](https://evilmartians.com/chronicles/lefthook) | Git hooks for pre-commit automation    |
 
 ---
@@ -36,6 +37,7 @@ Memorize is a fast and beautiful memory card game built using cutting-edge front
 * ✅ Matched pairs tracking
 * 🎉 End-game modal with stats
 * 🧼 Clean code, accessible components, and atomic hooks
+- 🔧 Fully tested with unit tests and hooks coverage using Vitest
 
 ---
 
@@ -54,9 +56,34 @@ pnpm preview
 # Lint and format code
 pnpm lint
 pnpm format
+
+# Run unit tests
+pnpm test
 ```
 
 > Pre-commit checks (via Lefthook) run Biome automatically on staged JS/TS/TSX files.
+
+---
+
+## 🧪 Tests
+
+This project uses [Vitest](https://vitest.dev) for unit testing.
+
+Test files are colocated inside:
+
+```
+src/
+└── __tests__/
+    ├── components/
+    ├── hooks/
+    └── helpers/
+```
+
+To run tests locally:
+
+```bash
+pnpm test
+```
 
 ---
 
@@ -64,11 +91,12 @@ pnpm format
 
 ```
 src/
+├── __tests__/        # Unit and component tests using Vitest
+├── @types/           # Global types (MemoryCard, Difficulty)
 ├── components/       # UI pieces (Card, GameBoard, Modal, etc.)
 ├── hooks/            # Game logic (useCards, useTimer, etc.)
 ├── const/            # Emojis, difficulties, animations
 ├── helpers/          # Utility functions (shuffle, id, etc.)
-├── @types/           # Global types (MemoryCard, Difficulty)
 ├── index.css         # Global styles (Tailwind + CSS vars)
 └── main.tsx          # App entry point
 ```
