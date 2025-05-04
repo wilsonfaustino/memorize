@@ -12,7 +12,7 @@ export function pickAndShuffleEmojis(emojis: string[], count: number): string[] 
   return duplicated.sort(() => Math.random() - 0.5)
 }
 
-function generateId(): string {
+export function generateId(): string {
   return Math.random().toString(36).slice(2, 10)
 }
 
