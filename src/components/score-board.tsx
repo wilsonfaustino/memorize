@@ -56,6 +56,7 @@ export function ScoreBoard({ moves, time, onRestart }: ScoreBoardProps) {
       ))}
 
       <button
+        aria-label="Restart game"
         className="group flex items-center gap-2 px-2 text-base hover:text-pink"
         onClick={onRestart}
         type="button">
